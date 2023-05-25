@@ -1,4 +1,5 @@
-const { devs, testServer } = require('../../../config.json');
+require('dotenv').config();
+const { devs } = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 
 module.exports = async (client, interaction) => {
@@ -8,7 +9,7 @@ module.exports = async (client, interaction) => {
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName
+      (cmd) => cmd.name === interaction.commandName,
     );
 
     if (!commandObject) return;
@@ -24,7 +25,7 @@ module.exports = async (client, interaction) => {
     }
 
     if (commandObject.testOnly) {
-      if (!(interaction.guild.id === testServer)) {
+      if (!(interaction.guild.id === process.env.GUILD_ID)) {
         interaction.reply({
           content: 'This command cannot be ran here.',
           ephemeral: true,
@@ -51,7 +52,7 @@ module.exports = async (client, interaction) => {
 
         if (!bot.permissions.has(permission)) {
           interaction.reply({
-            content: "I don't have enough permissions.",
+            content: 'I don\'t have enough permissions.',
             ephemeral: true,
           });
           return;
@@ -60,7 +61,8 @@ module.exports = async (client, interaction) => {
     }
 
     await commandObject.callback(client, interaction);
-  } catch (error) {
+  }
+  catch (error) {
     console.log(`There was an error running this command: ${error}`);
   }
 };
