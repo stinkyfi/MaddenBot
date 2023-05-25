@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { ApplicationCommandOptionType } = require('discord.js');
 const Standings = require('../../models/Standings');
 
@@ -39,6 +40,13 @@ module.exports = {
         },
     ],
     callback: (client, interaction) => {
+      console.log(interaction.user.id)
+      console.log(interaction.user.id)
+      if(interaction.user.id !== process.env.DEV)
+      {
+        interaction.reply(`You are not allowed to call this command`);
+        return;
+      }
       let user1 = interaction.options.get('user1').value;
       const result = interaction.options.get('result').value;
       let user2 = interaction.options.get('user2').value;
@@ -65,7 +73,7 @@ module.exports = {
             console.log(`Error saving results ${e}`);
             return;
           })
-          interaction.reply(`Results Accepted: ${user1} defeated ${user2}`);
+          interaction.reply(`Results Accepted`);
         } 
         else if (result == 'loss') {
           Standings.updateOne(q_user2, { wins: dbUser2.wins + 1 }).catch((e) => {
@@ -76,7 +84,7 @@ module.exports = {
             console.log(`Error saving results ${e}`);
             return;
           })
-          interaction.reply(`Results Accepted: ${user1} lost to ${user2}`);
+          interaction.reply(`Results Accepted`);
         } 
         else {
           Standings.updateOne(q_user1, { draw: dbUser1.draw + 1 }).catch((e) => {
@@ -87,7 +95,7 @@ module.exports = {
             console.log(`Error saving results ${e}`);
             return;
           })
-          interaction.reply(`Results Accepted: ${user1} tied with ${user2}`);
+          interaction.reply(`Results Accepted`);
         }
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);

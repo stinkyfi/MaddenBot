@@ -24,16 +24,25 @@ module.exports = {
         if (dbUser) {
             user = await client.users.fetch(dbUser.userId);
             record = `(${dbUser.wins}-${dbUser.loss}-${dbUser.draw})`;
+            chips = dbUser.championships;
+            console.log(dbUser.championships)
+            if(chips == 0) {rank = ':normal:'}
+            if(chips == 1) {rank = ':star~1:'}
+            if(chips == 2) {rank = ':superstar:'}
+            if(chips > 2) {rank = ':xfactor:'}
             const embed = new EmbedBuilder()
-            .setTitle(`${user.username}`)
+            .setTitle(`${rank} ${user.username}`)
             .setDescription('User vs. User Record')
-            .setImage(user.displayAvatarURL())
+            .setThumbnail(user.displayAvatarURL())
             .setColor(0x0099FF)
             .addFields(
               {
                 name: 'Wins-Loss-Draw',
                 value: record,
-                inline: true,
+              },
+              {
+                name: 'Championships',
+                value: `${dbUser.championships}`,
               }
             );
             await interaction.reply({ embeds: [embed] });

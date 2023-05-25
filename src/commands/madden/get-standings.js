@@ -16,7 +16,13 @@ module.exports = {
         let str = ":football: **Madden User Rankings** :football:\n";
         for (const s of standings) {
             user = await client.users.fetch(s.userId);
-            str += `${i}. ${user.username} (${s.wins}-${s.loss}-${s.draw}) \n`;
+            chips = s.championships;
+            console.log(chips)
+            if(chips == 1) {rank = ':star~1:'}
+            else if(chips == 2) {rank = ':superstar:'}
+            else if (chips > 2) {rank = ':xfactor:'}
+            else {rank = ':normal:'}
+            str += `${i}. ${rank} ${user.username} (${s.wins}-${s.loss}-${s.draw}) \n`;
             i++;
         }
         interaction.reply(str);

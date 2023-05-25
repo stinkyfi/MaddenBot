@@ -14,6 +14,11 @@ module.exports = {
     ],
     callback: (client, interaction) => {
       console.log("Adding New User");
+      if(interaction.user.id !== process.env.DEV)
+      {
+        interaction.reply(`You are not allowed to call this command`);
+        return;
+      }
       let user = interaction.options.get('user').value;
 
       (async () => {
@@ -30,7 +35,7 @@ module.exports = {
           });
 
         user = client.users.cache.get(`${user}`)
-        interaction.reply(`New User Added: ${user}`);
+        interaction.reply(`New User Added`);
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
