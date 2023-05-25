@@ -1,3 +1,5 @@
 .env
+.env.prod
+.env.dev
 config.json
 node_modules

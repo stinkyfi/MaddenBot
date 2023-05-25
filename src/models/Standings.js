@@ -18,6 +18,10 @@ const standingsSchema = new Schema({
     type: Number,
     default: 0,
   },
+  championships: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = model('Standings', standingsSchema);
