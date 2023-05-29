@@ -16,13 +16,12 @@ const client = new Client({
     try {
         mongoose.set('strictQuery', false);
         await mongoose.connect(process.env.MONGODB_URI, {});
-        console.log("Connected to DB");
-    
+        console.log('Connected to DB');
         eventHandler(client);
 
         client.login(process.env.TOKEN);
-    } catch (error)
-    {
+    }
+    catch (error) {
         console.log(`Error: ${error}`);
     }
 })();

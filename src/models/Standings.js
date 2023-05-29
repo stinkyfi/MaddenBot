@@ -22,6 +22,14 @@ const standingsSchema = new Schema({
     type: Number,
     default: 0,
   },
+  location: {
+    type: String,
+    required: true,
+  },
+  team: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = model('Standings', standingsSchema);

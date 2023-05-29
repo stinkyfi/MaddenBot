@@ -8,14 +8,14 @@ module.exports = async (client) => {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-      process.env.GUILD_ID
+      process.env.GUILD_ID,
     );
 
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd) => cmd.name === name
+        (cmd) => cmd.name === name,
       );
 
       if (existingCommand) {
@@ -33,10 +33,11 @@ module.exports = async (client) => {
 
           console.log(`🔁 Edited command "${name}".`);
         }
-      } else {
+      }
+      else {
         if (localCommand.deleted) {
           console.log(
-            `⏩ Skipping registering command "${name}" as it's set to delete.`
+            `⏩ Skipping registering command "${name}" as it's set to delete.`,
           );
           continue;
         }
@@ -50,7 +51,8 @@ module.exports = async (client) => {
         console.log(`👍 Registered command "${name}."`);
       }
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.log(`There was an error: ${error}`);
   }
 };

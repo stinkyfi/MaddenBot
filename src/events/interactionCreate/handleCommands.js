@@ -9,7 +9,7 @@ module.exports = async (client, interaction) => {
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName
+      (cmd) => cmd.name === interaction.commandName,
     );
 
     if (!commandObject) return;
@@ -52,7 +52,7 @@ module.exports = async (client, interaction) => {
 
         if (!bot.permissions.has(permission)) {
           interaction.reply({
-            content: "I don't have enough permissions.",
+            content: 'I don\'t have enough permissions.',
             ephemeral: true,
           });
           return;
@@ -61,7 +61,8 @@ module.exports = async (client, interaction) => {
     }
 
     await commandObject.callback(client, interaction);
-  } catch (error) {
+  }
+  catch (error) {
     console.log(`There was an error running this command: ${error}`);
   }
 };

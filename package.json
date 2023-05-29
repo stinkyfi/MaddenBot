@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "version": "1.0.0",
+  "version": "0.2.2",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -14,5 +14,8 @@
     "dotenv": "^16.0.3",
     "mongodb": "^5.5.0",
     "mongoose": "^7.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0"
   }
 }
