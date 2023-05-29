@@ -16,17 +16,7 @@ module.exports = {
         let str = '# Madden User Rankings \n';
         for (const s of standings) {
             user = await client.users.fetch(s.userId);
-<<<<<<< HEAD
             str += `${i}. ${getRank(s.championships)} ${user.username} \`(${s.wins}-${s.loss}-${s.draw})\` \n`;
-=======
-            chips = s.championships;
-            console.log(chips)
-            if(chips == 1) {rank = ':star~1:'}
-            else if(chips == 2) {rank = ':superstar:'}
-            else if (chips > 2) {rank = ':xfactor:'}
-            else {rank = ':normal:'}
-            str += `${i}. ${rank} ${user.username} (${s.wins}-${s.loss}-${s.draw}) \n`;
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
             i++;
         }
         interaction.reply(str);

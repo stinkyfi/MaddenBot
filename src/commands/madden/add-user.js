@@ -33,11 +33,6 @@ module.exports = {
         interaction.reply('New User Added');
       }
       catch (error) {
-=======
-        user = client.users.cache.get(`${user}`)
-        interaction.reply(`New User Added`);
-      } catch (error) {
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
         console.log(`Error updating rankings: ${error}`);
       }
     })();

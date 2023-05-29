@@ -6,18 +6,10 @@ module.exports = {
     /* @param {Client} client
      * @param {Interaction} interaction */
     callback: (client, interaction) => {
-<<<<<<< HEAD
       console.log(interaction.user.id);
       console.log(interaction.user.id);
       if (interaction.user.id !== process.env.DEV) {
         interaction.reply('You are not allowed to call this command');
-=======
-      console.log(interaction.user.id)
-      console.log(interaction.user.id)
-      if(interaction.user.id !== process.env.DEV)
-      {
-        interaction.reply(`You are not allowed to call this command`);
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
         return;
       }
       let user1 = interaction.options.get('user1').value;
@@ -45,15 +37,9 @@ module.exports = {
           Standings.updateOne(q_user2, { loss: dbUser2.loss + 1 }).catch((e) => {
             console.log(`Error saving results ${e}`);
             return;
-<<<<<<< HEAD
           });
           interaction.reply('Results Accepted');
         }
-=======
-          })
-          interaction.reply(`Results Accepted`);
-        } 
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
         else if (result == 'loss') {
           Standings.updateOne(q_user2, { wins: dbUser2.wins + 1 }).catch((e) => {
             console.log(`Error saving results ${e}`);
@@ -62,15 +48,9 @@ module.exports = {
           Standings.updateOne(q_user1, { loss: dbUser1.loss + 1 }).catch((e) => {
             console.log(`Error saving results ${e}`);
             return;
-<<<<<<< HEAD
           });
           interaction.reply('Results Accepted');
         }
-=======
-          })
-          interaction.reply(`Results Accepted`);
-        } 
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
         else {
           Standings.updateOne(q_user1, { draw: dbUser1.draw + 1 }).catch((e) => {
             console.log(`Error saving results ${e}`);
@@ -79,13 +59,8 @@ module.exports = {
           Standings.updateOne(q_user2, { draw: dbUser2.draw + 1 }).catch((e) => {
             console.log(`Error saving results ${e}`);
             return;
-<<<<<<< HEAD
           });
           interaction.reply('Results Accepted');
-=======
-          })
-          interaction.reply(`Results Accepted`);
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
         }
       }
       catch (error) {

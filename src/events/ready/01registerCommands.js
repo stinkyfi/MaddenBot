@@ -8,11 +8,7 @@ module.exports = async (client) => {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-<<<<<<< HEAD
       process.env.GUILD_ID,
-=======
-      process.env.GUILD_ID
->>>>>>> 662453c (Adding champion, permission locking on commands, media/emojis, and other enhancements)
     );
 
     for (const localCommand of localCommands) {
