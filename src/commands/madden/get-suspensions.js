@@ -23,7 +23,6 @@ module.exports = {
             const random = randomNumber(1, crimeCount);
             const crime = await Crimes.find({ id: random }).select('title');
             str += `**Player:** ${user.username}\n**Crime:** ${crime[0].title}\n**Length:** ${s.days} day(s)\n**Issued:** ${s.date}\n`;
-            i++;
         }
         interaction.reply(str);
       }
