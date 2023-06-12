@@ -8,7 +8,7 @@ const crimesSchema = new Schema({
   },
   title: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 

@@ -13,16 +13,15 @@ module.exports = {
         const suspended = await Suspensions.find();
         const crimeCount = await Crimes.find().count();
         let user = '';
-        let i = 1;
         let str = '# Suspended Users \n';
         for (const s of suspended) {
-            if(s.date > new Date()) {
+            if (s.date > new Date()) {
                 console.log('expired');
             }
             str += '----------------------------------\n';
             user = await client.users.fetch(s.userId);
-            let random = randomNumber(1, crimeCount);
-            let crime = await Crimes.find({ id: random }).select('title');
+            const random = randomNumber(1, crimeCount);
+            const crime = await Crimes.find({ id: random }).select('title');
             str += `**Player:** ${user.username}\n**Crime:** ${crime[0].title}\n**Length:** ${s.days} day(s)\n**Issued:** ${s.date}\n`;
             i++;
         }

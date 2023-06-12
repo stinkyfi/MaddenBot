@@ -22,7 +22,7 @@ module.exports = {
         const q_user = { userId: user };
         // Find the existing user
         const dbUser = await Standings.findOne(q_user);
-        
+
         const newSuspension = new Suspensions({
             userId: user,
             days: suspended,
@@ -42,7 +42,7 @@ module.exports = {
         .setColor(0xFF0000)
         .addFields(
           {
-            name: `Length:`,
+            name: 'Length:',
             value: `${suspended} Days`,
           },
         );

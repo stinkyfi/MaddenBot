@@ -13,7 +13,7 @@ module.exports = {
       try {
         const crimeCount = await Crimes.find().count();
         const newCrime = new Crimes({
-            id: crimeCount+1,
+            id: crimeCount + 1,
             title: crime,
           });
 

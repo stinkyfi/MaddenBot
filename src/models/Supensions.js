@@ -11,7 +11,7 @@ const suspensionsSchema = new Schema({
     default: 0,
   },
   date: {
-    type: Date
+    type: Date,
   },
 });
 
