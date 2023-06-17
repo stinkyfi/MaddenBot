@@ -13,7 +13,7 @@ export const getLocalCommands = (exceptions = [] as string[]) => {
     const commandFiles = getAllFiles(commandCategory);
 
     for (const commandFile of commandFiles) {
-      const commandObject = require(commandFile);
+      const commandObject = require(commandFile) as any;
 
       if (exceptions.includes(commandObject.name)) {
         continue;
