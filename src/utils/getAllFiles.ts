@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const getAllFiles = (directory, foldersOnly = false) => {
-  const fileNames = [];
+export const getAllFiles = (directory: any, foldersOnly = false) => {
+  const fileNames = [] as string[];
 
   const files = fs.readdirSync(directory, { withFileTypes: true });
 
@@ -22,5 +22,3 @@ const getAllFiles = (directory, foldersOnly = false) => {
 
   return fileNames;
 };
-
-module.exports = getAllFiles;
