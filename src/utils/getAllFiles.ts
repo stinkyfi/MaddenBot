@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
-module.exports = (directory, foldersOnly = false) => {
+const getAllFiles = (directory, foldersOnly = false) => {
   const fileNames = [];
 
   const files = fs.readdirSync(directory, { withFileTypes: true });
@@ -13,8 +13,7 @@ module.exports = (directory, foldersOnly = false) => {
       if (file.isDirectory()) {
         fileNames.push(filePath);
       }
-    }
-    else {
+    } else {
       if (file.isFile()) {
         fileNames.push(filePath);
       }
@@ -23,3 +22,5 @@ module.exports = (directory, foldersOnly = false) => {
 
   return fileNames;
 };
+
+module.exports = getAllFiles;

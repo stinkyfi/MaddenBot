@@ -1,16 +1,17 @@
-require('dotenv').config();
-const { devs } = require('../../../config.json');
-const getLocalCommands = require('../../utils/getLocalCommands');
+import { config } from 'dotenv';
+config();
+import * as devs from '../../../config.json';
+import { getLocalCommands } from '../../utils/getLocalCommands';
 
-module.exports = async (client, interaction) => {
+module.exports = async (client: string, interaction: any) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const localCommands = getLocalCommands();
+  const localCommands = getLocalCommands() as any;
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName,
-    );
+      (cmd: any) => cmd.name === interaction.commandName
+    )!;
 
     if (!commandObject) return;
 
@@ -25,7 +26,7 @@ module.exports = async (client, interaction) => {
     }
 
     if (commandObject.testOnly) {
-      if (!(interaction.guild.id === process.env.GUILD_ID)) {
+      if (!(interaction.guild.id === process.env['GUILD_ID'])) {
         interaction.reply({
           content: 'This command cannot be ran here.',
           ephemeral: true,
@@ -35,7 +36,7 @@ module.exports = async (client, interaction) => {
     }
 
     if (commandObject.permissionsRequired?.length) {
-      for (const permission of commandObject.permissionsRequired) {
+      for (const permission of commandObject.permissionsRequired as any) {
         if (!interaction.member.permissions.has(permission)) {
           interaction.reply({
             content: 'Not enough permissions.',
@@ -52,7 +53,7 @@ module.exports = async (client, interaction) => {
 
         if (!bot.permissions.has(permission)) {
           interaction.reply({
-            content: 'I don\'t have enough permissions.',
+            content: "I don't have enough permissions.",
             ephemeral: true,
           });
           return;
@@ -61,8 +62,7 @@ module.exports = async (client, interaction) => {
     }
 
     await commandObject.callback(client, interaction);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(`There was an error running this command: ${error}`);
   }
 };
