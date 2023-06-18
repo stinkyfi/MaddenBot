@@ -1,21 +1,21 @@
 require('dotenv').config();
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
-const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalCommands');
+import areCommandsDifferent from '../../utils/areCommandsDifferent';
+import getApplicationCommands from '../../utils/getApplicationCommands';
+import getLocalCommands from '../../utils/getLocalCommands';
 
-module.exports = async (client) => {
+const registerCommands = async (client: any) => {
   try {
-    const localCommands = getLocalCommands();
+    const localCommands = getLocalCommands() as any;
     const applicationCommands = await getApplicationCommands(
       client,
-      process.env.GUILD_ID,
+      process.env.GUILD_ID
     );
 
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd) => cmd.name === name,
+        (cmd: any) => cmd.name === name
       );
 
       if (existingCommand) {
@@ -33,11 +33,10 @@ module.exports = async (client) => {
 
           console.log(`🔁 Edited command "${name}".`);
         }
-      }
-      else {
+      } else {
         if (localCommand.deleted) {
           console.log(
-            `⏩ Skipping registering command "${name}" as it's set to delete.`,
+            `⏩ Skipping registering command "${name}" as it's set to delete.`
           );
           continue;
         }
@@ -51,8 +50,9 @@ module.exports = async (client) => {
         console.log(`👍 Registered command "${name}."`);
       }
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(`There was an error: ${error}`);
   }
 };
+
+export default registerCommands;

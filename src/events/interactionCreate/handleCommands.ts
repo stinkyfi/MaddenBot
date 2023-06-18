@@ -1,9 +1,8 @@
-import { config } from 'dotenv';
-config();
-import * as devs from '../../../config.json';
-import { getLocalCommands } from '../../utils/getLocalCommands';
+require('dotenv').config();
+import { devs } from '../../../config.json';
+import getLocalCommands from '../../utils/getLocalCommands';
 
-module.exports = async (client: string, interaction: any) => {
+const handleCommands = async (client: string, interaction: any) => {
   if (!interaction.isChatInputCommand()) return;
 
   const localCommands = getLocalCommands() as any;
@@ -66,3 +65,5 @@ module.exports = async (client: string, interaction: any) => {
     console.log(`There was an error running this command: ${error}`);
   }
 };
+
+export default handleCommands;

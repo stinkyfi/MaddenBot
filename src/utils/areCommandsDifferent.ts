@@ -1,4 +1,4 @@
-module.exports = (existingCommand: any, localCommand: any) => {
+const areCommandsDifferent = (existingCommand: any, localCommand: any) => {
   const areChoicesDifferent = (existingChoices: any, localChoices: any) => {
     for (const localChoice of localChoices) {
       const existingChoice = existingChoices?.find(
@@ -53,3 +53,5 @@ module.exports = (existingCommand: any, localCommand: any) => {
 
   return false;
 };
+
+export default areCommandsDifferent;

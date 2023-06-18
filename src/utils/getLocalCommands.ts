@@ -1,7 +1,7 @@
-import * as path from 'path';
-import { getAllFiles } from './getAllFiles';
+import path from 'path';
+import getAllFiles from './getAllFiles';
 
-export const getLocalCommands = (exceptions = [] as string[]) => {
+const getLocalCommands = (exceptions = [] as string[]) => {
   const localCommands = [] as string[];
 
   const commandCategories = getAllFiles(
@@ -25,3 +25,5 @@ export const getLocalCommands = (exceptions = [] as string[]) => {
 
   return localCommands;
 };
+
+export default getLocalCommands;

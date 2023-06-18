@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
-export const getAllFiles = (directory: any, foldersOnly = false) => {
+const getAllFiles = (directory: any, foldersOnly = false) => {
   const fileNames = [] as string[];
 
   const files = fs.readdirSync(directory, { withFileTypes: true });
@@ -22,3 +22,5 @@ export const getAllFiles = (directory: any, foldersOnly = false) => {
 
   return fileNames;
 };
+
+export default getAllFiles;
