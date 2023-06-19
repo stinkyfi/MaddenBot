@@ -1,8 +1,8 @@
-require('dotenv').config();
+import 'dotenv/config';
 import { devs } from '../../../config.json';
 import getLocalCommands from '../../utils/getLocalCommands';
 
-const handleCommands = async (client: string, interaction: any) => {
+const handleCommands = async (client: any, interaction: any) => {
   if (!interaction.isChatInputCommand()) return;
 
   const localCommands = getLocalCommands() as any;
@@ -25,7 +25,7 @@ const handleCommands = async (client: string, interaction: any) => {
     }
 
     if (commandObject.testOnly) {
-      if (!(interaction.guild.id === process.env['GUILD_ID'])) {
+      if (!(interaction.guild.id === process.env.GUILD_ID)) {
         interaction.reply({
           content: 'This command cannot be ran here.',
           ephemeral: true,

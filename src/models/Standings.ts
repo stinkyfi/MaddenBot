@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const standingsSchema = new Schema({
   userId: {
@@ -32,4 +32,5 @@ const standingsSchema = new Schema({
   },
 });
 
-module.exports = model('Standings', standingsSchema);
+const Standings = model('Standings', standingsSchema);
+export default Standings;

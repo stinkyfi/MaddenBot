@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 import areCommandsDifferent from '../../utils/areCommandsDifferent';
 import getApplicationCommands from '../../utils/getApplicationCommands';
 import getLocalCommands from '../../utils/getLocalCommands';
