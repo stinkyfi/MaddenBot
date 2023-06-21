@@ -5,21 +5,25 @@ module.exports = (exceptions = [] as any[]) => {
   const localCommands = [] as any[];
 
   const commandCategories = getAllFiles(
-    path.join(__dirname, '..', 'commands'),
+    path.join(__dirname, '../commands'),
     true
   );
+  //Imports paths of files inside commands
 
   for (const commandCategory of commandCategories) {
+    //For each directory (in this case), inside commands
     const commandFiles = getAllFiles(commandCategory);
-
+    //Get all files inside the specified folder
     for (const commandFile of commandFiles) {
       const commandObject = require(commandFile);
-
+      //And for each file inside that specified folder
       if (exceptions.includes(commandObject.name)) {
         continue;
+        //Cross references to see if the exceptions argument passed shares
+        //name with an already existing command, if it does the nothing is done
       }
-
       localCommands.push(commandObject);
+      //Else they are added to localCommands
     }
   }
 

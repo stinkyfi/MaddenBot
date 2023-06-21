@@ -20,6 +20,7 @@ module.exports = (directory: any, foldersOnly = false) => {
         fileNames.push(filePath);
       }
     }
+    //Populates filenNames array with paths
   }
   return fileNames;
 };

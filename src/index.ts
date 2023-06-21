@@ -24,3 +24,4 @@ const client = new Client({
     console.log(`Error: ${error}`);
   }
 })();
+//Checks for mongoDB database connection string
