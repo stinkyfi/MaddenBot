@@ -1,6 +1,6 @@
 const fs = require('fs');
-const path = require('path');
-
+import path from 'path';
+//Cannot redeclare path
 module.exports = (directory: any, foldersOnly = false) => {
   const fileNames = [];
 
@@ -11,9 +11,14 @@ module.exports = (directory: any, foldersOnly = false) => {
     const filePath = path.join(directory, file.name);
     //Creates path for files
 
-    if ((foldersOnly && file.isDirectory()) || (foldersOnly && file.isFile())) {
-      fileNames.push(filePath);
-      //Populates filenames array with paths to files
+    if (foldersOnly) {
+      if (file.isDirectory()) {
+        fileNames.push(filePath);
+      }
+    } else {
+      if (file.isFile()) {
+        fileNames.push(filePath);
+      }
     }
   }
   return fileNames;

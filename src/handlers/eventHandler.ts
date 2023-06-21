@@ -1,17 +1,17 @@
-const path = require('path');
-const getAllFiles = require('../utils/getAllFiles');
-
+import path from 'path';
+const allFiles = require('../utils/getAllFiles');
+//Renamed getAllFiles to allFiles because TS compilation error
 module.exports = (client: any) => {
-  const eventFolders = getAllFiles(
+  const eventFolders = allFiles(
     path.join(__dirname, '../events'),
     true
   ) as string[];
   //Goes 2 folders up enters events and lists folders inside
   for (const eventFolder of eventFolders!) {
     //Goes thru each event folder separately
-    const eventFiles = getAllFiles(eventFolder) as string[];
+    const eventFiles = allFiles(eventFolder) as string[];
     eventFiles.sort((a, b) => (a > b ? 1 : -1));
-    //Uses getAllFiles which returns path of all files and folders inside
+    //Uses allFiles which returns path of all files and folders inside
     //the folder to define eventFiles then sorts
 
     const eventName = eventFolder.replace(/\\/g, '/').split('/').pop()!;
@@ -28,5 +28,3 @@ module.exports = (client: any) => {
     });
   }
 };
-
-export default eventHandler;

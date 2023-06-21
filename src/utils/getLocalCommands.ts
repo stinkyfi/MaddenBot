@@ -1,4 +1,4 @@
-require('path');
+import path from 'path';
 const getAllFiles = require('./getAllFiles');
 
 module.exports = (exceptions = [] as any[]) => {
