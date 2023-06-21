@@ -1,16 +1,16 @@
 import 'dotenv/config';
-import { ApplicationCommandOptionType } from 'discord.js';
+import { ApplicationCommandOptionType, Client, Interaction } from 'discord.js';
 import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: any, interaction: any) => {
+  callback: (client: Client | any, interaction: Interaction | any) => {
     if (interaction.user.id !== process.env.DEV) {
       interaction.reply('You are not allowed to call this command');
       return;
     }
-    let user = interaction.options.get('user').value as any;
+    let user = interaction.options.get('user').value;
 
     (async () => {
       try {

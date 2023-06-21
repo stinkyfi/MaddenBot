@@ -2,10 +2,11 @@ import 'dotenv/config';
 import areCommandsDifferent from '../../utils/areCommandsDifferent';
 import getApplicationCommands from '../../utils/getApplicationCommands';
 import getLocalCommands from '../../utils/getLocalCommands';
+import { Client } from 'discord.js';
 
-const registerCommands = async (client: any) => {
+const registerCommands = async (client: Client | any) => {
   try {
-    const localCommands = getLocalCommands() as any;
+    const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
       process.env.GUILD_ID
@@ -15,7 +16,7 @@ const registerCommands = async (client: any) => {
       const { name, description, options } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd: any) => cmd.name === name
+        (cmd: { name: any }) => cmd.name === name
       );
 
       if (existingCommand) {

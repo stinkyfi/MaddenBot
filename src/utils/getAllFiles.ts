@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const getAllFiles = (directory: any, foldersOnly = false) => {
-  const fileNames = [] as string[];
+const getAllFiles = (directory: string, foldersOnly = false) => {
+  const fileNames = [];
 
   const files = fs.readdirSync(directory, { withFileTypes: true });
 

@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import 'discord.js';
+import { Client, Interaction } from 'discord.js';
 const Standings = require('../../models/Standings');
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: any, interaction: any) => {
+  callback: (client: Client | any, interaction: Interaction | any) => {
     console.log('Get Standings');
 
     (async () => {

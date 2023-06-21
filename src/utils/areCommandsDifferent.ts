@@ -1,8 +1,11 @@
-const areCommandsDifferent = (existingCommand: any, localCommand: any) => {
-  const areChoicesDifferent = (existingChoices: any, localChoices: any) => {
+const areCommandsDifferent = (
+  existingCommand: { description: any; options: any[] },
+  localCommand: { description: any; options: any[] }
+) => {
+  const areChoicesDifferent = (existingChoices: any[], localChoices: any[]) => {
     for (const localChoice of localChoices) {
       const existingChoice = existingChoices?.find(
-        (choice: any) => choice.name === localChoice.name
+        (choice: { name: any }) => choice.name === localChoice.name
       )!;
 
       if (!existingChoice) {
@@ -16,10 +19,10 @@ const areCommandsDifferent = (existingCommand: any, localCommand: any) => {
     return false;
   };
 
-  const areOptionsDifferent = (existingOptions: any, localOptions: any) => {
+  const areOptionsDifferent = (existingOptions: any[], localOptions: any[]) => {
     for (const localOption of localOptions) {
       const existingOption = existingOptions?.find(
-        (option: any) => option.name === localOption.name
+        (option: { name: any }) => option.name === localOption.name
       );
 
       if (!existingOption) {

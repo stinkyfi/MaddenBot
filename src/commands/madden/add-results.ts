@@ -1,11 +1,11 @@
 import 'dotenv/config';
-import { ApplicationCommandOptionType } from 'discord.js';
+import { ApplicationCommandOptionType, Client, Interaction } from 'discord.js';
 import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: any, interaction: any) => {
+  callback: (client: Client | any, interaction: Interaction | any) => {
     console.log(interaction.user.id);
     console.log(interaction.user.id);
     if (interaction.user.id !== process.env.DEV) {
@@ -23,8 +23,8 @@ module.exports = {
         const q_user1 = { userId: user1 };
         const q_user2 = { userId: user2 };
         // Find the existing use
-        const dbUser1 = (await Standings.findOne(q_user1)) as any;
-        const dbUser2 = (await Standings.findOne(q_user2)) as any;
+        const dbUser1 = (await Standings.findOne(q_user1))!;
+        const dbUser2 = (await Standings.findOne(q_user2))!;
         // Get users
         user1 = client.users.cache.get(`${user1}`);
         user2 = client.users.cache.get(`${user2}`);

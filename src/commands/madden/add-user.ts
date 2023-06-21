@@ -1,19 +1,19 @@
 import 'dotenv/config';
-import { ApplicationCommandOptionType } from 'discord.js';
+import { ApplicationCommandOptionType, Client, Interaction } from 'discord.js';
 import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: any, interaction: any) => {
+  callback: (client: Client | any, interaction: Interaction | any) => {
     console.log('Adding New User');
     if (interaction.user.id !== process.env.DEV) {
       interaction.reply('You are not allowed to call this command');
       return;
     }
-    let user = interaction.options.get('user').value as string;
-    const location = interaction.options.get('location').value as string;
-    const team = interaction.options.get('team').value as string;
+    let user = interaction.options.get('user').value;
+    const location = interaction.options.get('location').value;
+    const team = interaction.options.get('team').value;
 
     (async () => {
       try {

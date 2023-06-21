@@ -1,11 +1,16 @@
 import 'dotenv/config';
-import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
+import {
+  ApplicationCommandOptionType,
+  Client,
+  EmbedBuilder,
+  Interaction,
+} from 'discord.js';
 import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: any, interaction: any) => {
+  callback: (client: Client | any, interaction: Interaction | any) => {
     let user1 = interaction.options.get('user1').value;
     let user2 = interaction.options.get('user2').value;
 
@@ -16,8 +21,8 @@ module.exports = {
         const q_user1 = { userId: user1 };
         const q_user2 = { userId: user2 };
         // Find the existing user
-        const dbUser1 = (await Standings.findOne(q_user1)) as any;
-        const dbUser2 = (await Standings.findOne(q_user2)) as any;
+        const dbUser1 = (await Standings.findOne(q_user1))!;
+        const dbUser2 = (await Standings.findOne(q_user2))!;
         // Get users
         user1 = client.users.cache.get(`${user1}`);
         user2 = client.users.cache.get(`${user2}`);

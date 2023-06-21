@@ -10,7 +10,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 rest
   .get(Routes.applicationGuildCommands(clientId, guildId))
   .then((data: any) => {
-    const promises = [] as any[];
+    const promises = [];
     for (const command of data) {
       const deleteUrl = `${Routes.applicationGuildCommands(
         clientId,

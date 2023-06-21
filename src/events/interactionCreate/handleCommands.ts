@@ -1,21 +1,25 @@
 import 'dotenv/config';
 import { devs } from '../../../config.json';
 import getLocalCommands from '../../utils/getLocalCommands';
+import { Client, Interaction } from 'discord.js';
 
-const handleCommands = async (client: any, interaction: any) => {
+const handleCommands = async (
+  client: Client | any,
+  interaction: Interaction | any
+) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const localCommands = getLocalCommands() as any;
+  const localCommands = getLocalCommands();
 
   try {
     const commandObject = localCommands.find(
-      (cmd: any) => cmd.name === interaction.commandName
+      (cmd) => cmd.name === interaction.commandName
     )!;
 
     if (!commandObject) return;
 
     if (commandObject.devOnly) {
-      if (!devs.includes(interaction.member.id)) {
+      if (!(devs as string[]).includes(interaction.member.id)) {
         interaction.reply({
           content: 'Only developers are allowed to run this command.',
           ephemeral: true,
@@ -35,7 +39,7 @@ const handleCommands = async (client: any, interaction: any) => {
     }
 
     if (commandObject.permissionsRequired?.length) {
-      for (const permission of commandObject.permissionsRequired as any) {
+      for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions.has(permission)) {
           interaction.reply({
             content: 'Not enough permissions.',
@@ -48,7 +52,7 @@ const handleCommands = async (client: any, interaction: any) => {
 
     if (commandObject.botPermissions?.length) {
       for (const permission of commandObject.botPermissions) {
-        const bot = interaction.guild.members.me;
+        const bot = interaction?.guild?.members.me!;
 
         if (!bot.permissions.has(permission)) {
           interaction.reply({
