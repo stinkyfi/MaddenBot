@@ -1,4 +1,4 @@
-const areCommandsDifferent = (
+module.exports = (
   existingCommand: { description: any; options: any[] },
   localCommand: { description: any; options: any[] }
 ) => {
@@ -56,5 +56,3 @@ const areCommandsDifferent = (
 
   return false;
 };
-
-export default areCommandsDifferent;

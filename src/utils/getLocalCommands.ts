@@ -1,7 +1,7 @@
-import path from 'path';
-import getAllFiles from './getAllFiles';
+require('path');
+const getAllFiles = require('./getAllFiles');
 
-const getLocalCommands = (exceptions = [] as any[]) => {
+module.exports = (exceptions = [] as any[]) => {
   const localCommands = [] as any[];
 
   const commandCategories = getAllFiles(
@@ -25,5 +25,3 @@ const getLocalCommands = (exceptions = [] as any[]) => {
 
   return localCommands;
 };
-
-export default getLocalCommands;

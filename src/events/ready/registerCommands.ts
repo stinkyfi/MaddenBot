@@ -1,10 +1,10 @@
-import 'dotenv/config';
-import areCommandsDifferent from '../../utils/areCommandsDifferent';
-import getApplicationCommands from '../../utils/getApplicationCommands';
-import getLocalCommands from '../../utils/getLocalCommands';
+require('dotenv').config();
+const areCommandsDifferent = require('../../utils/areCommandsDifferent');
+const getApplicationCommands = require('../../utils/getApplicationCommands');
+const getLocalCommands = require('../../utils/getLocalCommands');
 import { Client } from 'discord.js';
 
-const registerCommands = async (client: Client | any) => {
+module.exports = async (client: Client | any) => {
   try {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
@@ -55,5 +55,3 @@ const registerCommands = async (client: Client | any) => {
     console.log(`There was an error: ${error}`);
   }
 };
-
-export default registerCommands;

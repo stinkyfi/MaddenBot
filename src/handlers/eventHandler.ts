@@ -1,8 +1,7 @@
-import path from 'path';
-import { Client } from 'discord.js';
-import getAllFiles from '../utils/getAllFiles';
+const path = require('path');
+const getAllFiles = require('../utils/getAllFiles');
 
-const eventHandler = function (client: Client) {
+module.exports = (client: any) => {
   const eventFolders = getAllFiles(
     path.join(__dirname, '../events'),
     true

@@ -1,11 +1,8 @@
-import 'dotenv/config';
-import {
-  ApplicationCommandOptionType,
-  Client,
-  EmbedBuilder,
-  Interaction,
-} from 'discord.js';
-import Standings from '../../models/Standings';
+import { Interaction, Client } from 'discord.js';
+
+require('dotenv').config();
+const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+const Standings = require('../../models/Standings');
 
 module.exports = {
   /* @param {Client} client

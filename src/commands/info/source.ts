@@ -1,5 +1,5 @@
-import 'dotenv/config';
-import 'discord.js';
+require('dotenv').config();
+require('discord.js');
 import { Interaction } from 'discord.js';
 
 module.exports = {

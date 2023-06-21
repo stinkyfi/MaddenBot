@@ -1,7 +1,5 @@
 import { Client } from 'discord.js';
 
-const consoleLog = (client: Client | any) => {
+module.exports = (client: Client | any) => {
   console.log(`${client.user.tag} is online.`);
 };
-
-export default consoleLog;

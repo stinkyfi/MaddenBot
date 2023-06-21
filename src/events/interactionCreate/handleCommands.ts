@@ -1,9 +1,9 @@
-import 'dotenv/config';
-import { devs } from '../../../config.json';
-import getLocalCommands from '../../utils/getLocalCommands';
+require('dotenv').config();
+const { devs } = require('../../../config.json');
+const getLocalCommands = require('../../utils/getLocalCommands');
 import { Client, Interaction } from 'discord.js';
 
-const handleCommands = async (
+module.exports = async (
   client: Client | any,
   interaction: Interaction | any
 ) => {
@@ -13,7 +13,7 @@ const handleCommands = async (
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName
+      (cmd: any) => cmd.name === interaction.commandName
     )!;
 
     if (!commandObject) return;
@@ -69,5 +69,3 @@ const handleCommands = async (
     console.log(`There was an error running this command: ${error}`);
   }
 };
-
-export default handleCommands;

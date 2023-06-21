@@ -1,9 +1,6 @@
 import { Client } from 'discord.js';
 
-const getApplicationCommands = async (
-  client: Client | any,
-  guildId: string
-) => {
+module.exports = async (client: Client | any, guildId: string) => {
   let applicationCommands;
 
   if (guildId) {
@@ -16,5 +13,3 @@ const getApplicationCommands = async (
   await applicationCommands.fetch();
   return applicationCommands;
 };
-
-export default getApplicationCommands;
