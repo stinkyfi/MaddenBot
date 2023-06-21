@@ -1,8 +1,7 @@
 import path from 'path';
 import getAllFiles from '../utils/getAllFiles';
-import { Client } from 'discord.js';
 
-const eventHandler = (client: Client | any) => {
+const eventHandler = (client: any) => {
   const eventFolders = getAllFiles(path.join(__dirname, '..', 'events'), true);
 
   for (const eventFolder of eventFolders) {
