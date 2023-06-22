@@ -19,7 +19,7 @@ module.exports = (client: Client) => {
     //Replaces path to folder with name of last destination
     //(removes the / and everything before them )
 
-    client.on(eventName, async (arg: any) => {
+    client.on(eventName, async (arg: string) => {
       for (const eventFile of eventFiles) {
         //For each file from the folder
         const eventFunction = require(eventFile);

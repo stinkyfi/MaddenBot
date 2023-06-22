@@ -4,7 +4,6 @@ module.exports = (
 ) => {
   const areChoicesDifferent = (existingChoices: any[], localChoices: any[]) => {
     for (const localChoice of localChoices) {
-      //For each LC inside LCS
       const existingChoice = existingChoices?.find(
         (choice: { name: any }) => choice.name === localChoice.name
       )!;

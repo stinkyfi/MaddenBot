@@ -2,7 +2,7 @@ import path from 'path';
 const getAllFiles = require('./getAllFiles');
 
 module.exports = (exceptions = [] as string[]) => {
-  const localCommands = [] as string[];
+  const localCommands = [];
 
   const commandCategories = getAllFiles(
     path.join(__dirname, '../commands'),
