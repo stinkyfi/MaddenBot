@@ -1,8 +1,8 @@
 import { Client } from 'discord.js';
 import path from 'path';
 const allFiles = require('../utils/getAllFiles');
-//Renamed getAllFiles to allFiles because TS compilation error
-module.exports = (client: Client | any) => {
+
+module.exports = (client: Client) => {
   const eventFolders = allFiles(
     path.join(__dirname, '../events'),
     true
@@ -21,11 +21,9 @@ module.exports = (client: Client | any) => {
 
     client.on(eventName, async (arg: any) => {
       for (const eventFile of eventFiles) {
-        //For each TS/JS file from the folder
+        //For each file from the folder
         const eventFunction = require(eventFile);
-        //Create a function that requires that file as a module like in the case of
-        //allFiles which is a function turned into a module then exported and used as a
-        //custom function somewhere else
+        //Creates functions with name of the files present
         await eventFunction(client, arg);
       }
     });

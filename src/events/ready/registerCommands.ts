@@ -11,6 +11,8 @@ module.exports = async (client: Client | any) => {
       client,
       process.env.GUILD_ID
     );
+    //Takes available commands based on wheter the bot is inside a server
+    //or a dm and returns corresponding ID's
 
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;

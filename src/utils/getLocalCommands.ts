@@ -1,18 +1,18 @@
 import path from 'path';
 const getAllFiles = require('./getAllFiles');
 
-module.exports = (exceptions = [] as any[]) => {
-  const localCommands = [] as any[];
+module.exports = (exceptions = [] as string[]) => {
+  const localCommands = [] as string[];
 
   const commandCategories = getAllFiles(
     path.join(__dirname, '../commands'),
     true
-  );
+  ) as string[];
   //Imports paths of files inside commands
 
   for (const commandCategory of commandCategories) {
     //For each directory (in this case), inside commands
-    const commandFiles = getAllFiles(commandCategory);
+    const commandFiles = getAllFiles(commandCategory) as string[];
     //Get all files inside the specified folder
     for (const commandFile of commandFiles) {
       const commandObject = require(commandFile);
