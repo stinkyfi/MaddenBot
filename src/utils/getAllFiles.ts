@@ -12,7 +12,11 @@ module.exports = (directory: string, foldersOnly = false) => {
     //Creates path for files
 
     if (foldersOnly) {
-      if (file.isDirectory() || file.isFile()) {
+      if (file.isDirectory()) {
+        fileNames.push(filePath);
+      }
+    } else {
+      if (file.isFile()) {
         fileNames.push(filePath);
       }
     }
