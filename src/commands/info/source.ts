@@ -1,11 +1,11 @@
 require('dotenv').config();
 require('discord.js');
-import { Interaction } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (interaction: Interaction | any) => {
+  callback: (interaction: CommandInteraction) => {
     console.log('Get Source');
     interaction.reply(process.env.SOURCE);
   },

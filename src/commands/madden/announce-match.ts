@@ -1,4 +1,4 @@
-import { Interaction, Client } from 'discord.js';
+import { CommandInteraction, Client } from 'discord.js';
 
 require('dotenv').config();
 const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
@@ -7,25 +7,26 @@ const Standings = require('../../models/Standings');
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: Client | any, interaction: Interaction | any) => {
-    let user1 = interaction.options.get('user1').value;
-    let user2 = interaction.options.get('user2').value;
-
+  callback: (client: Client, interaction: CommandInteraction) => {
+    let user1 = interaction.options.get('user1')!.value as any;
+    let user2 = interaction.options.get('user2')!.value as any;
+    //Gets users
     (async () => {
       try {
         console.log('Announcing Match');
-        // Users Queries
+        //Message for the command
         const q_user1 = { userId: user1 };
         const q_user2 = { userId: user2 };
-        // Find the existing user
+        //Finds the users
         const dbUser1 = (await Standings.findOne(q_user1))!;
         const dbUser2 = (await Standings.findOne(q_user2))!;
-        // Get users
+        //Checks if they are registered
         user1 = client.users.cache.get(`${user1}`);
         user2 = client.users.cache.get(`${user2}`);
+        //Saves the users changes in cache
         const record1 = `(${dbUser1.wins}-${dbUser1.loss}-${dbUser1.draw})`;
         const record2 = `(${dbUser2.wins}-${dbUser2.loss}-${dbUser2.draw})`;
-
+        //And retrieves their scores
         const embed = new EmbedBuilder()
           .setTitle("It's Game Time!")
           .setThumbnail('https://i.ibb.co/0mg2Zf0/madden-1.png')
@@ -46,6 +47,7 @@ module.exports = {
               value: 'User Match is Starting!',
             }
           );
+        //Embed message for game start between 2 users
         await interaction.reply({ embeds: [embed] });
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);

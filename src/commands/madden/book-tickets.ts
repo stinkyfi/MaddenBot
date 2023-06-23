@@ -1,4 +1,4 @@
-import { Interaction, Client } from 'discord.js';
+import { Client, CommandInteraction } from 'discord.js';
 
 require('dotenv').config();
 const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
@@ -7,21 +7,24 @@ const Standings = require('../../models/Standings');
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: Client | any, interaction: Interaction | any) => {
-    let user = interaction.options.get('user').value;
-    const location = interaction.options.get('location').value;
+  callback: (client: Client, interaction: CommandInteraction) => {
+    let user = interaction.options.get('user')!.value as any;
+    //Retrieves user value
+    const location = interaction.options.get('location')!.value as string;
+    //Retrieves user location ( the one that was introduced when user was
+    // registered in the bot db )
 
     (async () => {
       try {
         console.log('Booking Vacation');
         const d = new Date();
-        // Users Queries
+        //Creates date
         const q_user = { userId: user };
-        // Find the existing user
+        //Find the existing user
         const dbUser = (await Standings.findOne(q_user))!;
-        // Get users
+        //Get users from database
         user = client.users.cache.get(`${user}`);
-
+        //Saves user changes in cache
         const embed = new EmbedBuilder()
           .setTitle(`:airplane: Flight to ${location} Booked`)
           .setThumbnail('https://i.ibb.co/sHp0hSn/Air-update-Dolphins.jpg')
@@ -36,7 +39,9 @@ module.exports = {
               value: d.toLocaleString(),
             }
           );
+        //Creates embed message for booked flight
         await interaction.reply({ embeds: [embed] });
+        //And sends it in chat
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }

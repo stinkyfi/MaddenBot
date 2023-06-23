@@ -1,4 +1,4 @@
-import { Interaction, Client } from 'discord.js';
+import { CommandInteraction, Client } from 'discord.js';
 
 require('dotenv').config();
 const { ApplicationCommandOptionType } = require('discord.js');
@@ -7,38 +7,41 @@ const Standings = require('../../models/Standings');
 module.exports = {
   /* @param {Client} client
    * @param {Interaction} interaction */
-  callback: (client: Client | any, interaction: Interaction | any) => {
+  callback: (client: Client, interaction: CommandInteraction) => {
     console.log(interaction.user.id);
     console.log(interaction.user.id);
     if (interaction.user.id !== process.env.DEV) {
+      //Checks to see if user has permisions
       interaction.reply('You are not allowed to call this command');
+      //If not they are not allowed to run the command
       return;
     }
-    let user1 = interaction.options.get('user1').value;
-    const result = interaction.options.get('result').value;
-    let user2 = interaction.options.get('user2').value;
+    let user1 = interaction.options.get('user1')!.value as any;
+    const result = interaction.options.get('result')!.value as string;
+    let user2 = interaction.options.get('user2')!.value as any;
 
     (async () => {
       try {
         console.log('Adding Results');
-        // Users Queries
         const q_user1 = { userId: user1 };
         const q_user2 = { userId: user2 };
-        // Find the existing use
+        //Find the existing users
         const dbUser1 = (await Standings.findOne(q_user1))!;
         const dbUser2 = (await Standings.findOne(q_user2))!;
-        // Get users
+        //Get registered users
         user1 = client.users.cache.get(`${user1}`);
         user2 = client.users.cache.get(`${user2}`);
-
+        //Saves results in cache
         if (result == 'won') {
           Standings.updateOne(q_user1, { wins: dbUser1.wins + 1 }).catch(
+            //Adds a win to user 1
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
             }
           );
           Standings.updateOne(q_user2, { loss: dbUser2.loss + 1 }).catch(
+            //Adds a loss to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
@@ -47,12 +50,14 @@ module.exports = {
           interaction.reply('Results Accepted');
         } else if (result == 'loss') {
           Standings.updateOne(q_user2, { wins: dbUser2.wins + 1 }).catch(
+            //Adds a win to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
             }
           );
           Standings.updateOne(q_user1, { loss: dbUser1.loss + 1 }).catch(
+            //Adds a loss to user 1
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
@@ -73,6 +78,7 @@ module.exports = {
             }
           );
           interaction.reply('Results Accepted');
+          //Else both users get a draw
         }
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);
