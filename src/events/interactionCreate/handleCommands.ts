@@ -62,16 +62,16 @@ module.exports = async (client: Client, interaction: Interaction) => {
     if (commandObject.botPermissions?.length) {
       // Now the command is checked to see if its got botPermisions
       for (const permission of commandObject.botPermissions) {
-        //It checks thru them
+        // It checks thru them
         const bot = interaction?.guild?.members.me!;
-        //Bot is a way for the bot to get its own ID when interacting
+        // Bot is a way for the bot to get its own ID when interacting
         if (!bot.permissions.has(permission)) {
-          //And if its not allowed to do x action
+          // And if its not allowed to do x action
           interaction.reply({
             content: "I don't have enough permissions.",
             ephemeral: true,
           });
-          //It returns this
+          // It returns this
           return;
         }
       }
