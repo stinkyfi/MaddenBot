@@ -10,7 +10,7 @@ const rest = new REST({ version: '9' }).setToken(token);
 
 rest
   .get(Routes.applicationGuildCommands(clientId, guildId))
-  //Retrieves commands available on the server or in DM
+  // Retrieves commands available on the server or in DM
   .then((data: any) => {
     const promises = [];
     for (const command of data) {
@@ -18,7 +18,7 @@ rest
         clientId,
         guildId
       )}/${command.id}`;
-      //Deletes selected command from data
+      // Deletes selected command from data
       promises.push(rest.delete(deleteUrl));
     }
     return Promise.all(promises);
