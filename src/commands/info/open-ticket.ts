@@ -1,4 +1,4 @@
-import { CommandInteraction, Client } from 'discord.js';
+import { Client, CommandInteraction } from 'discord.js';
 
 require('dotenv').config();
 require('discord.js');
