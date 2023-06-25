@@ -32,6 +32,6 @@ const standingsSchema = new Schema({
   },
 });
 
-//Profile schema for each user
+// Profile schema for each user
 
 module.exports = model('Standings', standingsSchema);

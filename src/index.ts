@@ -25,4 +25,4 @@ const client = new Client({
   }
 })();
 
-//Checks for mongoDB database connection string
+// Checks for mongoDB database connection string

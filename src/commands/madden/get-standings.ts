@@ -17,10 +17,10 @@ module.exports = {
           draw: -1,
           loss: 1,
         });
-        //Finds standings and sorts them
+        // Finds standings and sorts them
         let i = 1;
         let str = '# Madden User Rankings \n';
-        //Defining the title of standings for users
+        // Defining the title of standings for users
         for (const s of standings) {
           user = await client.users.fetch(s.userId);
           str += `${i}. ${getRank(s.championships)} ${user.username} \`(${
@@ -28,7 +28,7 @@ module.exports = {
           }-${s.loss}-${s.draw})\` \n`;
           i++;
         }
-        //Retrieves the statistics of users in standings
+        // Retrieves the statistics of users in standings
         interaction.reply(str);
       } catch (error) {
         console.log(`Error getting rankings: ${error}`);

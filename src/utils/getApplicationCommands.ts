@@ -9,8 +9,8 @@ module.exports = async (client: Client, guildId: string) => {
   } else {
     applicationCommands = await client.application!.commands;
   }
-  //Checking to see if the bot is inside a server or private DM before showing
-  //respective commands for chat
+  // Checking to see if the bot is inside a server or private DM before showing
+  // respective commands for chat
 
   await applicationCommands.fetch(applicationCommands as any);
   return applicationCommands;

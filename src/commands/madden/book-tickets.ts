@@ -9,22 +9,22 @@ module.exports = {
    * @param {Interaction} interaction */
   callback: (client: Client, interaction: CommandInteraction) => {
     let user = interaction.options.get('user')!.value as any;
-    //Retrieves user value
+    // Retrieves user value
     const location = interaction.options.get('location')!.value as string;
-    //Retrieves user location ( the one that was introduced when user was
+    // Retrieves user location ( the one that was introduced when user was
     // registered in the bot db )
 
     (async () => {
       try {
         console.log('Booking Vacation');
         const d = new Date();
-        //Creates date
+        // Creates date
         const q_user = { userId: user };
-        //Find the existing user
+        // Find the existing user
         const dbUser = (await Standings.findOne(q_user))!;
-        //Get users from database
+        // Get users from database
         user = client.users.cache.get(`${user}`);
-        //Saves user changes in cache
+        // Saves user changes in cache
         const embed = new EmbedBuilder()
           .setTitle(`:airplane: Flight to ${location} Booked`)
           .setThumbnail('https://i.ibb.co/sHp0hSn/Air-update-Dolphins.jpg')
@@ -39,9 +39,9 @@ module.exports = {
               value: d.toLocaleString(),
             }
           );
-        //Creates embed message for booked flight
+        // Creates embed message for booked flight
         await interaction.reply({ embeds: [embed] });
-        //And sends it in chat
+        //  And sends it in chat
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
