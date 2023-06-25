@@ -11,9 +11,9 @@ module.exports = {
     console.log(interaction.user.id);
     console.log(interaction.user.id);
     if (interaction.user.id !== process.env.DEV) {
-      //Checks to see if user has permisions
+      // Checks to see if user has permisions
       interaction.reply('You are not allowed to call this command');
-      //If not they are not allowed to run the command
+      // If not they are not allowed to run the command
       return;
     }
     let user1 = interaction.options.get('user1')!.value as any;
@@ -25,23 +25,23 @@ module.exports = {
         console.log('Adding Results');
         const q_user1 = { userId: user1 };
         const q_user2 = { userId: user2 };
-        //Find the existing users
+        // Find the existing users
         const dbUser1 = (await Standings.findOne(q_user1))!;
         const dbUser2 = (await Standings.findOne(q_user2))!;
-        //Get registered users
+        // Get registered users
         user1 = client.users.cache.get(`${user1}`);
         user2 = client.users.cache.get(`${user2}`);
-        //Saves results in cache
+        // Saves results in cache
         if (result == 'won') {
           Standings.updateOne(q_user1, { wins: dbUser1.wins + 1 }).catch(
-            //Adds a win to user 1
+            // Adds a win to user 1
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
             }
           );
           Standings.updateOne(q_user2, { loss: dbUser2.loss + 1 }).catch(
-            //Adds a loss to user 2
+            // Adds a loss to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
@@ -50,14 +50,14 @@ module.exports = {
           interaction.reply('Results Accepted');
         } else if (result == 'loss') {
           Standings.updateOne(q_user2, { wins: dbUser2.wins + 1 }).catch(
-            //Adds a win to user 2
+            // Adds a win to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
             }
           );
           Standings.updateOne(q_user1, { loss: dbUser1.loss + 1 }).catch(
-            //Adds a loss to user 1
+            // Adds a loss to user 1
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
@@ -78,7 +78,7 @@ module.exports = {
             }
           );
           interaction.reply('Results Accepted');
-          //Else both users get a draw
+          // Else both users get a draw
         }
       } catch (error) {
         console.log(`Error updating rankings: ${error}`);

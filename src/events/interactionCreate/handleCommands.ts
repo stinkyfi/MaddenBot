@@ -60,7 +60,7 @@ module.exports = async (client: Client, interaction: Interaction) => {
     }
 
     if (commandObject.botPermissions?.length) {
-      //Now the command is checked to see if its got botPermisions
+      // Now the command is checked to see if its got botPermisions
       for (const permission of commandObject.botPermissions) {
         //It checks thru them
         const bot = interaction?.guild?.members.me!;
