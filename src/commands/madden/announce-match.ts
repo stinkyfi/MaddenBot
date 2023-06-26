@@ -1,8 +1,8 @@
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
 import { CommandInteraction, Client } from 'discord.js';
-
-require('dotenv').config();
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client
@@ -28,7 +28,7 @@ module.exports = {
         const record2 = `(${dbUser2.wins}-${dbUser2.loss}-${dbUser2.draw})`;
         // And retrieves their scores
         const embed = new EmbedBuilder()
-          .setTitle("It's Game Time!")
+          .setTitle('It Is Game Time!')
           .setThumbnail('https://i.ibb.co/0mg2Zf0/madden-1.png')
           .setColor(0xff0000)
           .addFields(
@@ -45,11 +45,12 @@ module.exports = {
             {
               name: ' ',
               value: 'User Match is Starting!',
-            }
+            },
           );
         // Embed message for game start between 2 users
         await interaction.reply({ embeds: [embed] });
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
     })();
@@ -75,11 +76,14 @@ module.exports = {
 function getRank(chips: number) {
   if (chips == 1) {
     return process.env.EMOJI_STAR;
-  } else if (chips == 2) {
+  }
+ else if (chips == 2) {
     return process.env.EMOJI_SUPERSTAR;
-  } else if (chips > 2) {
+  }
+ else if (chips > 2) {
     return process.env.EMOJI_XFACTOR;
-  } else {
+  }
+ else {
     return process.env.EMOJI_NORMAL;
   }
 }

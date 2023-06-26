@@ -1,7 +1,6 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import { CommandInteraction, Client } from 'discord.js';
-
-const { ApplicationCommandOptionType } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
@@ -37,7 +36,8 @@ module.exports = {
         user = client.users.cache.get(`${user}`);
         interaction.reply('New User Added');
         // User is saved and added
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
     })();

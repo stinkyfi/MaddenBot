@@ -1,11 +1,11 @@
-require('dotenv').config();
+import { Routes } from 'discord-api-types/v9';
+import { REST } from '@discordjs/rest';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-
-const token = process.env.TOKEN;
-const clientId = process.env.CLIENT_ID;
-const guildId = process.env.TEST_GUILD_ID;
+const token = process.env.TOKEN as string;
+const clientId = process.env.CLIENT_ID as string;
+const guildId = process.env.TEST_GUILD_ID as string;
 const rest = new REST({ version: '9' }).setToken(token);
 
 rest
@@ -16,8 +16,13 @@ rest
     for (const command of data) {
       const deleteUrl = `${Routes.applicationGuildCommands(
         clientId,
+        guildId,
+      )}/${command.id}` as any;
+      /* const deleteUrl = Routes.applicationGuildCommands(
+        clientId,
         guildId
-      )}/${command.id}`;
+      ).toString.concat('/', command.id.toString)
+      */
       // Deletes selected command from data
       promises.push(rest.delete(deleteUrl));
     }

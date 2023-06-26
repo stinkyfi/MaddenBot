@@ -1,11 +1,11 @@
-module.exports = (
+const areCommandsDifferent = (
   existingCommand: { description: any; options: any[] },
-  localCommand: { description: any; options: any[] }
+  localCommand: { description: any; options: any[] },
 ) => {
   const areChoicesDifferent = (existingChoices: any[], localChoices: any[]) => {
     for (const localChoice of localChoices) {
       const existingChoice = existingChoices?.find(
-        (choice: { name: any }) => choice.name === localChoice.name
+        (choice: { name: any }) => choice.name === localChoice.name,
       )!;
       // Looks for match of name between each existing choice and local choice
       // and if nothing is found undefined is returned.
@@ -27,7 +27,7 @@ module.exports = (
     for (const localOption of localOptions) {
       // For each option inside localoptions
       const existingOption = existingOptions?.find(
-        (option: { name: any }) => option.name === localOption.name
+        (option: { name: any }) => option.name === localOption.name,
       );
       // Existing options are searched for name match against local options
 
@@ -44,7 +44,7 @@ module.exports = (
           (existingOption.choices?.length || 0) ||
         areChoicesDifferent(
           localOption.choices || [],
-          existingOption.choices || []
+          existingOption.choices || [],
         )
       ) {
         return true;
@@ -65,3 +65,6 @@ module.exports = (
 
   return false;
 };
+
+module.exports = areCommandsDifferent;
+export default areCommandsDifferent;

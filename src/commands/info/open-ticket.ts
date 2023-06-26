@@ -1,5 +1,6 @@
-require('dotenv').config();
 import { Client, CommandInteraction } from 'discord.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client

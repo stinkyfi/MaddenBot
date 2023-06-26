@@ -1,8 +1,8 @@
+import allFiles from '../utils/getAllFiles';
 import { Client } from 'discord.js';
 import path from 'path';
-const allFiles = require('../utils/getAllFiles');
 
-module.exports = (client: Client) => {
+const eventHandler = (client: Client) => {
   const eventFolders = allFiles(
     path.join(__dirname, '../events'),
     true
@@ -29,3 +29,6 @@ module.exports = (client: Client) => {
     });
   }
 };
+
+module.exports = eventHandler;
+export default eventHandler;

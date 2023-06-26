@@ -1,12 +1,12 @@
+import getAllFiles from './getAllFiles';
 import path from 'path';
-const getAllFiles = require('./getAllFiles');
 
-module.exports = (exceptions = [] as string[]) => {
+const getLocalCommands = (exceptions = [] as string[]) => {
   const localCommands = [];
 
   const commandCategories = getAllFiles(
     path.join(__dirname, '../commands'),
-    true
+    true,
   ) as string[];
   // Imports paths of files inside commands
 
@@ -29,3 +29,6 @@ module.exports = (exceptions = [] as string[]) => {
 
   return localCommands;
 };
+
+module.exports = getLocalCommands;
+export default getLocalCommands;

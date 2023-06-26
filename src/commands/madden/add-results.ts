@@ -1,8 +1,8 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import { CommandInteraction, Client } from 'discord.js';
-
-require('dotenv').config();
-const { ApplicationCommandOptionType } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client
@@ -38,49 +38,52 @@ module.exports = {
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           Standings.updateOne(q_user2, { loss: dbUser2.loss + 1 }).catch(
             // Adds a loss to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           interaction.reply('Results Accepted');
-        } else if (result == 'loss') {
+        }
+ else if (result == 'loss') {
           Standings.updateOne(q_user2, { wins: dbUser2.wins + 1 }).catch(
             // Adds a win to user 2
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           Standings.updateOne(q_user1, { loss: dbUser1.loss + 1 }).catch(
             // Adds a loss to user 1
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           interaction.reply('Results Accepted');
-        } else {
+        }
+ else {
           Standings.updateOne(q_user1, { draw: dbUser1.draw + 1 }).catch(
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           Standings.updateOne(q_user2, { draw: dbUser2.draw + 1 }).catch(
             (e: Error) => {
               console.log(`Error saving results ${e}`);
               return;
-            }
+            },
           );
           interaction.reply('Results Accepted');
           // Else both users get a draw
         }
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
     })();

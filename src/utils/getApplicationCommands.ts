@@ -1,12 +1,13 @@
 import { Client } from 'discord.js';
 
-module.exports = async (client: Client, guildId: string) => {
+const getApplicationCommands = async (client: Client, guildId: string) => {
   let applicationCommands;
 
   if (guildId) {
     const guild = await client.guilds.fetch(guildId);
     applicationCommands = guild.commands;
-  } else {
+  }
+ else {
     applicationCommands = await client.application!.commands;
   }
   // Checking to see if the bot is inside a server or private DM before showing
@@ -15,3 +16,6 @@ module.exports = async (client: Client, guildId: string) => {
   await applicationCommands.fetch(applicationCommands as any);
   return applicationCommands;
 };
+
+module.exports = getApplicationCommands;
+export default getApplicationCommands;

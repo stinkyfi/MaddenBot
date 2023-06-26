@@ -1,7 +1,8 @@
-require('dotenv').config();
-const { devs } = require('../../../config.json');
-const getLocalCommands = require('../../utils/getLocalCommands');
-import { Client, GuildMember, Interaction } from 'discord.js';
+import { Client, Guild, GuildMember, Interaction } from 'discord.js';
+import getLocalCommands from '../../utils/getLocalCommands';
+import { devs } from '../../../config.json';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = async (client: Client, interaction: Interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -63,12 +64,12 @@ module.exports = async (client: Client, interaction: Interaction) => {
       // Now the command is checked to see if its got botPermisions
       for (const permission of commandObject.botPermissions) {
         // It checks thru them
-        const bot = interaction?.guild?.members.me!;
+        const bot = (interaction.guild as Guild).members.me;
         // Bot is a way for the bot to get its own ID when interacting
-        if (!bot.permissions.has(permission)) {
+        if (!(bot as GuildMember).permissions.has(permission)) {
           // And if its not allowed to do x action
           interaction.reply({
-            content: "I don't have enough permissions.",
+            content: 'I do not have enough permissions.',
             ephemeral: true,
           });
           // It returns this

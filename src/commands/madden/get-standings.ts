@@ -1,7 +1,7 @@
-require('dotenv').config();
-require('discord.js');
-const Standings = require('../../models/Standings');
 import { Client, CommandInteraction } from 'discord.js';
+import Standings from '../../models/Standings';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client
@@ -30,7 +30,8 @@ module.exports = {
         }
         // Retrieves the statistics of users in standings
         interaction.reply(str);
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error getting rankings: ${error}`);
       }
     })();
@@ -43,11 +44,14 @@ module.exports = {
 function getRank(chips: number) {
   if (chips == 1) {
     return process.env.EMOJI_STAR;
-  } else if (chips == 2) {
+  }
+ else if (chips == 2) {
     return process.env.EMOJI_SUPERSTAR;
-  } else if (chips > 2) {
+  }
+ else if (chips > 2) {
     return process.env.EMOJI_XFACTOR;
-  } else {
+  }
+ else {
     return process.env.EMOJI_NORMAL;
   }
 }

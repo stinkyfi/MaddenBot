@@ -1,8 +1,8 @@
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
 import { Client, CommandInteraction } from 'discord.js';
-
-require('dotenv').config();
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client
@@ -37,12 +37,13 @@ module.exports = {
             {
               name: ':airplane_departure: Departure',
               value: d.toLocaleString(),
-            }
+            },
           );
         // Creates embed message for booked flight
         await interaction.reply({ embeds: [embed] });
         //  And sends it in chat
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
     })();
@@ -68,11 +69,14 @@ module.exports = {
 function getRank(chips: number) {
   if (chips == 1) {
     return process.env.EMOJI_STAR;
-  } else if (chips == 2) {
+  }
+ else if (chips == 2) {
     return process.env.EMOJI_SUPERSTAR;
-  } else if (chips > 2) {
+  }
+ else if (chips > 2) {
     return process.env.EMOJI_XFACTOR;
-  } else {
+  }
+ else {
     return process.env.EMOJI_NORMAL;
   }
 }

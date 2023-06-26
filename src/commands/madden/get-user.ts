@@ -1,8 +1,8 @@
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
 import { Client, CommandInteraction } from 'discord.js';
-
-require('dotenv').config();
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = {
   /* @param {Client} client
@@ -37,10 +37,12 @@ module.exports = {
           // Creates an embed profile for the getUser command
           await interaction.reply({ embeds: [embed] });
           // If they are a registered user it returns the embed profile
-        } else {
+        }
+ else {
           interaction.reply('User not in league, please add them');
         }
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error Displaying User: ${error}`);
       }
     })();
@@ -60,9 +62,11 @@ module.exports = {
 function getRank(chips: number) {
   if (chips == 1) {
     return process.env.EMOJI_STAR;
-  } else if (chips == 2) {
+  }
+ else if (chips == 2) {
     return process.env.EMOJI_SUPERSTAR;
-  } else if (chips > 2) {
+  }
+ else if (chips > 2) {
     return process.env.EMOJI_XFACTOR;
   }
   return process.env.EMOJI_NORMAL;
@@ -72,15 +76,20 @@ function getRank(chips: number) {
 function getColor(teamName: string) {
   if (teamName === 'Bengals') {
     return 0xfb4f14;
-  } else if (teamName === 'Browns') {
+  }
+ else if (teamName === 'Browns') {
     return 0xff3c00;
-  } else if (teamName === 'Bulls') {
+  }
+ else if (teamName === 'Bulls') {
     return 0x000e7a;
-  } else if (teamName === 'Crusaders') {
+  }
+ else if (teamName === 'Crusaders') {
     return 0xf5f50f;
-  } else if (teamName === 'Elks') {
+  }
+ else if (teamName === 'Elks') {
     return 0x2d5feb;
-  } else if (teamName === 'Huskies') {
+  }
+ else if (teamName === 'Huskies') {
     return 0x2d9feb;
   }
   return 0x000000;

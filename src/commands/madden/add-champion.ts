@@ -1,7 +1,6 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import { CommandInteraction, Client } from 'discord.js';
-
-const { ApplicationCommandOptionType } = require('discord.js');
-const Standings = require('../../models/Standings');
+import Standings from '../../models/Standings';
 
 module.exports = {
   /* @param {Client} client
@@ -34,11 +33,13 @@ module.exports = {
           });
           interaction.reply('New Champion Added');
           // Updates standings for said user and they get a championship
-        } else {
-          interaction.reply("User Doesn't Exist: Please add them to league");
+        }
+ else {
+          interaction.reply('User Does Not Exist: Please add them to league');
           // If they are not a registered user
         }
-      } catch (error) {
+      }
+ catch (error) {
         console.log(`Error updating rankings: ${error}`);
       }
     })();

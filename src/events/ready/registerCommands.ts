@@ -1,12 +1,13 @@
-require('dotenv').config();
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
-const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalCommands');
+import getApplicationCommands from '../../utils/getApplicationCommands';
+import areCommandsDifferent from '../../utils/areCommandsDifferent';
+import getLocalCommands from '../../utils/getLocalCommands';
 import {
   ApplicationCommandManager,
   Client,
   GuildApplicationCommandManager,
 } from 'discord.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 module.exports = async (client: Client) => {
   try {
@@ -14,7 +15,7 @@ module.exports = async (client: Client) => {
     const applicationCommands =
       ((await getApplicationCommands(
         client,
-        process.env.GUILD_ID
+        process.env.GUILD_ID!,
       )) as ApplicationCommandManager) || GuildApplicationCommandManager;
     // Takes available commands based on wheter the bot is inside a server
     // or a dm and returns corresponding commands based on ID's
@@ -22,7 +23,7 @@ module.exports = async (client: Client) => {
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;
       const existingCommand = await applicationCommands.cache.find(
-        (cmd: { name: any }) => cmd.name === name
+        (cmd: { name: any }) => cmd.name === name,
       );
       // Checks the cache for applicationCommands and cross references their name with
       // name key added to all localCommands if === then existingCommand : undefined
@@ -46,11 +47,12 @@ module.exports = async (client: Client) => {
           // And if they are then existingCommand inside applicationCommands can be edited
           console.log(`🔁 Edited command "${name}".`);
         }
-      } else {
+      }
+ else {
         if (localCommand.deleted) {
           // Else if command doesn't exist and delete command was ran its qued for deletion
           console.log(
-            `⏩ Skipping registering command "${name}" as it's set to delete.`
+            `⏩ Skipping registering command "${name}" as it's set to delete.`,
           );
           continue;
         }
@@ -64,7 +66,8 @@ module.exports = async (client: Client) => {
         console.log(`👍 Registered command "${name}."`);
       }
     }
-  } catch (error) {
+  }
+ catch (error) {
     console.log(`There was an error: ${error}`);
   }
 };
