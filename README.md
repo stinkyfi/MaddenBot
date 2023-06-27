@@ -2,8 +2,6 @@
 
 This bot was created to assist in Madden User Leagues.
 
-<!-- No need to say it was built with MongoDB and Nodejs since you would have to note the rest of dependencies, like dotenv and whatever else you might add -->
-
 ## Commands
 
 ---
@@ -56,12 +54,8 @@ npm install
 node ./src/index.js
 ```
 
-<!-- Most users work in linux and not mac, not that it matters, just personal preference to change \ for / -->
-
 - Or run bot in dev mode
 
 ```sh
 nodemon
 ```
-
-<!-- Feel free to redo all of this to your taste, but these are the steps I had to take to even run the bot -->
